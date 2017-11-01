@@ -1,0 +1,33 @@
+{
+    "name": "deflip/startup",
+    "description": "Startup for Definite + Flipbox Project.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Krisan Alfa Timur",
+            "email": "krisan47@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Sys\\": "sys/"
+        },
+        "files": [
+            "./sys/helper.php"
+        ]
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "league/plates": "^3.3",
+        "league/route": "^3.0",
+        "zendframework/zend-diactoros": "^1.6",
+        "kitetail/zttp": "^0.3.0",
+        "vlucas/phpdotenv": "^2.4"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^3.3",
+        "filp/whoops": "^2.1"
+    }
+}
