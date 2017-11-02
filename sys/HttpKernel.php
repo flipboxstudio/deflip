@@ -2,13 +2,7 @@
 
 namespace Sys;
 
-use Exception;
-use Zend\Diactoros\Response;
-use League\Route\RouteCollection;
-use Zend\Diactoros\ServerRequest;
-use Zend\Diactoros\Response\SapiEmitter;
-
-abstract class HttpKernel
+class HttpKernel
 {
     protected $app;
 
@@ -21,10 +15,10 @@ abstract class HttpKernel
     {
         $this->app->bootIfNotBooted();
 
-        return $this->app->get(SapiEmitter::class)->emit(
-            $this->app->get(RouteCollection::class)->dispatch(
-                $this->app->get(ServerRequest::class),
-                $this->app->get(Response::class)
+        return $this->app->get('Zend\Diactoros\Response\EmitterInterface')->emit(
+            $this->app->get('League\Route\RouteCollection')->dispatch(
+                $this->app->get('Psr\Http\Message\ServerRequestInterface'),
+                $this->app->get('Psr\Http\Message\ResponseInterface')
             )
         );
     }

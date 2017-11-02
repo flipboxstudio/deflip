@@ -25,36 +25,36 @@ Server Hostname:        localhost
 Server Port:            8000
 
 Document Path:          /
-Document Length:        20026 bytes
+Document Length:        0 bytes
 
 Concurrency Level:      10
-Time taken for tests:   4.188 seconds
+Time taken for tests:   3.457 seconds
 Complete requests:      1000
 Failed requests:        0
-Total transferred:      20199000 bytes
-HTML transferred:       20026000 bytes
-Requests per second:    238.75 [#/sec] (mean)
-Time per request:       41.884 [ms] (mean)
-Time per request:       4.188 [ms] (mean, across all concurrent requests)
-Transfer rate:          4709.57 [Kbytes/sec] received
+Total transferred:      173000 bytes
+HTML transferred:       0 bytes
+Requests per second:    289.29 [#/sec] (mean)
+Time per request:       34.567 [ms] (mean)
+Time per request:       3.457 [ms] (mean, across all concurrent requests)
+Transfer rate:          48.87 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       0
-Processing:     4   42   2.8     41      53
-Waiting:        4   41   2.8     41      52
-Total:          5   42   2.8     41      53
+Processing:     9   34   2.3     34      41
+Waiting:        9   34   2.3     34      41
+Total:         10   34   2.3     34      41
 
 Percentage of the requests served within a certain time (ms)
-  50%     41
-  66%     42
-  75%     43
-  80%     43
-  90%     45
-  95%     45
-  98%     47
-  99%     48
- 100%     53 (longest request)
+  50%     34
+  66%     35
+  75%     35
+  80%     36
+  90%     37
+  95%     38
+  98%     39
+  99%     40
+ 100%     41 (longest request)
 ```
 
 ## LARAVEL

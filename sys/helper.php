@@ -1,6 +1,6 @@
 <?php
 
-if (! function_exists('dd')) {
+if (!function_exists('dd')) {
     function dd()
     {
         call_user_func_array('dump', func_get_args());
@@ -9,11 +9,11 @@ if (! function_exists('dd')) {
     }
 }
 
-if (! function_exists('starts_with')) {
+if (!function_exists('starts_with')) {
     function starts_with($haystack, $needles)
     {
         foreach ((array) $needles as $needle) {
-            if ($needle !== '' && substr($haystack, 0, strlen($needle)) === (string) $needle) {
+            if ('' !== $needle && substr($haystack, 0, strlen($needle)) === (string) $needle) {
                 return true;
             }
         }
@@ -22,7 +22,7 @@ if (! function_exists('starts_with')) {
     }
 }
 
-if (! function_exists('ends_with')) {
+if (!function_exists('ends_with')) {
     function ends_with($haystack, $needles)
     {
         foreach ((array) $needles as $needle) {
@@ -35,12 +35,12 @@ if (! function_exists('ends_with')) {
     }
 }
 
-if (! function_exists('env')) {
+if (!function_exists('env')) {
     function env($key, $default = null)
     {
         $value = getenv($key);
 
-        if ($value === false) {
+        if (false === $value) {
             return value($default);
         }
 

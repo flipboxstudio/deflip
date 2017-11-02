@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Kernel;
+require_once __DIR__.'/../vendor/autoload.php';
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+use Sys\HttpKernel;
 
-$kernel = new Kernel($app);
+$app = require_once(__DIR__.'/../bootstrap/app.php');
 
-return $kernel->run();
+$httpKernel = new HttpKernel($app);
+
+return $httpKernel->run();

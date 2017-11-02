@@ -4,7 +4,6 @@ namespace Sys;
 
 use Whoops\Run;
 use League\Container\Container;
-use Whoops\Handler\HandlerInterface;
 use Whoops\Handler\PrettyPageHandler;
 use Sys\Exceptions\SimpleErrorHandler;
 
@@ -25,10 +24,10 @@ class Application
     {
         $this->rootPath = $rootPath;
         $this->container = new Container();
-        $this->container->share(self::class, function () {
+        $this->container->share('Sys\Application', function () {
             return $this;
         });
-        $this->container->share(Container::class, function () {
+        $this->container->share('League\Container\ContainerInterface', function () {
             return $this->container;
         });
     }
@@ -42,7 +41,7 @@ class Application
 
     public function registerErrorHandler(string $handler)
     {
-        $this->container->share(HandlerInterface::class, $handler)->withArguments([$this]);
+        $this->container->share('Whoops\Handler\HandlerInterface', $handler)->withArguments([$this]);
     }
 
     protected function bootErrorHandler()
@@ -58,10 +57,10 @@ class Application
         $errorHandler->register();
     }
 
-    protected function createDefaultNonDebugErrorHandler(): HandlerInterface
+    protected function createDefaultNonDebugErrorHandler()
     {
-        if ($this->container->has(HandlerInterface::class)) {
-            return $this->container->get(HandlerInterface::class);
+        if ($this->container->has('Whoops\Handler\HandlerInterface')) {
+            return $this->container->get('Whoops\Handler\HandlerInterface');
         }
 
         return new SimpleErrorHandler($this);
@@ -84,7 +83,7 @@ class Application
             'app.path' => '',
             'app.publicPath' => '/public',
             'app.routesPath' => '/routes',
-            'app.templatesPath' => '/resources/views',
+            'app.templatesPath' => '/web',
         ] as $pathName => $relativePath) {
             $this->container->share($pathName, function () use ($relativePath) {
                 return $this->rootPath.$relativePath;
