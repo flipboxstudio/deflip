@@ -24,7 +24,7 @@ class WebStrategy extends ApplicationStrategy
         $view = ('/' === $path) ? 'index' : $path;
         $templates = $this->container->get('League\Plates\Engine');
 
-        if ($templates->exists($path)) {
+        if ($templates->exists($view)) {
             return $this->render($templates, $view);
         }
 
