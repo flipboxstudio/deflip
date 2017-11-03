@@ -2,15 +2,17 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-use Dotenv\Dotenv;
-use Sys\Application;
-use Sys\HttpKernel;
-use App\Providers\AppServiceProvider;
-use App\Providers\RouteServiceProvider;
+try {
+    (new Dotenv\Dotenv(__DIR__.'/../'))->load();
+} catch (Dotenv\Exception\InvalidPathException $e) {
+}
 
-(new Dotenv(__DIR__.'/..'))->load();
+$app = new Sys\Application(realpath(__DIR__.'/../'));
 
-$app = new Application(__DIR__.'/..');
-$httpKernel = new HttpKernel($app);
+$app->router->group([
+    'namespace' => 'Controllers',
+], function ($router) {
+    require __DIR__.'/../routes.php';
+});
 
-return $httpKernel->run();
+$app->run();

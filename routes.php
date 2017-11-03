@@ -1,9 +1,6 @@
 <?php
 
-use League\Route\RouteGroup;
-use League\Route\Strategy\JsonStrategy;
-
-$route->group('/api', function (RouteGroup $route) {
-    $route->get('/posts', 'Controllers\Api\PostController::index');
-    $route->get('/posts/{id}', 'Controllers\Api\PostController::show');
-})->setStrategy(new JsonStrategy());
+$router->group(['prefix' => '/api'], function ($router) {
+    $router->get('/posts', 'Api\PostController@index');
+    $router->get('/posts/{id}', 'Api\PostController@show');
+});

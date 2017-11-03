@@ -15,7 +15,7 @@ class PostController
         $this->api = $api;
     }
 
-    public function index(ServerRequestInterface $request, ResponseInterface $response)
+    public function index(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $response->getBody()->write(
             $this->api->post->all()->body()
@@ -24,10 +24,10 @@ class PostController
         return $response;
     }
 
-    public function show(ServerRequestInterface $request, ResponseInterface $response, array $params = [])
+    public function show(ServerRequestInterface $request, ResponseInterface $response, int $id): ResponseInterface
     {
         $response->getBody()->write(
-            $this->api->post->get($params['id'])->body()
+            $this->api->post->read($id)->body()
         );
 
         return $response;

@@ -28,33 +28,33 @@ Document Path:          /
 Document Length:        259 bytes
 
 Concurrency Level:      10
-Time taken for tests:   3.643 seconds
+Time taken for tests:   2.881 seconds
 Complete requests:      1000
 Failed requests:        0
-Total transferred:      432000 bytes
+Total transferred:      503000 bytes
 HTML transferred:       259000 bytes
-Requests per second:    274.52 [#/sec] (mean)
-Time per request:       36.427 [ms] (mean)
-Time per request:       3.643 [ms] (mean, across all concurrent requests)
-Transfer rate:          115.81 [Kbytes/sec] received
+Requests per second:    347.12 [#/sec] (mean)
+Time per request:       28.809 [ms] (mean)
+Time per request:       2.881 [ms] (mean, across all concurrent requests)
+Transfer rate:          170.51 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.2      0       2
-Processing:     8   36   3.0     36      44
-Waiting:        8   36   3.0     36      44
-Total:         10   36   2.9     36      44
+Connect:        0    0   0.0      0       0
+Processing:     3   29   3.1     28      38
+Waiting:        2   28   3.1     28      37
+Total:          3   29   3.1     28      38
 
 Percentage of the requests served within a certain time (ms)
-  50%     36
-  66%     37
-  75%     38
-  80%     38
-  90%     40
-  95%     41
-  98%     42
-  99%     43
- 100%     44 (longest request)
+  50%     28
+  66%     30
+  75%     30
+  80%     31
+  90%     33
+  95%     34
+  98%     35
+  99%     36
+ 100%     38 (longest request)
 ```
 
 ## LARAVEL
