@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Api\Drivers;
+namespace Sys\Api\Drivers;
 
 use Zttp\Zttp;
 use Zttp\ZttpResponse;
@@ -17,9 +17,15 @@ abstract class Driver
         return Zttp::asJson()->get($this->url($path), $query);
     }
 
-    public function post(string $path, array $data = []): ZttpResponse
+    public function post(string $path, array $data = [], array $query = []): ZttpResponse
     {
-        return Zttp::asJson()->post($this->url($path), $data);
+        return Zttp::asJson()->post(
+            $this->buildQueryString(
+                $this->url($path),
+                $query
+            ),
+            $data
+    );
     }
 
     public function upload(string $path, array $data = []): ZttpResponse
@@ -34,6 +40,18 @@ abstract class Driver
             $this->basePath(),
             $path,
         ]));
+    }
+
+    protected function buildQueryString(string $url, array $query)
+    {
+        if (empty($query)) {
+            return $url;
+        }
+
+        return implode('?', [
+            $url,
+            http_build_query($query)
+        ]);
     }
 
     abstract public function baseUrl(): string;

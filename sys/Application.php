@@ -3,7 +3,6 @@
 namespace Sys;
 
 use Whoops\Run;
-use League\Container\Container;
 use Whoops\Handler\PrettyPageHandler;
 use Sys\Exceptions\SimpleErrorHandler;
 
@@ -18,6 +17,7 @@ class Application
     protected $preloadedProviders = [
         'Sys\Providers\HttpKernelServiceProvider',
         'Sys\Providers\PlatesServiceProvider',
+        'Sys\Route\Providers\RouteServiceProvider',
     ];
 
     public function __construct(string $rootPath)
@@ -41,7 +41,7 @@ class Application
 
     public function registerErrorHandler(string $handler)
     {
-        $this->container->share('Whoops\Handler\HandlerInterface', $handler)->withArguments([$this]);
+        $this->container->share('Whoops\Handler\HandlerInterface', $handler);
     }
 
     protected function bootErrorHandler()
@@ -82,8 +82,7 @@ class Application
         foreach ([
             'app.path' => '',
             'app.publicPath' => '/public',
-            'app.routesPath' => '/routes',
-            'app.templatesPath' => '/web',
+            'app.templatesPath' => '/views',
         ] as $pathName => $relativePath) {
             $this->container->share($pathName, function () use ($relativePath) {
                 return $this->rootPath.$relativePath;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Api\Drivers;
+namespace Sys\Api\Drivers;
 
 class Post extends JsonPlaceholder
 {

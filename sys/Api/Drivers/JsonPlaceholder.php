@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Api\Drivers;
+namespace Sys\Api\Drivers;
 
 abstract class JsonPlaceholder extends Driver
 {

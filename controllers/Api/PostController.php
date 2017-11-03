@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace Controllers\Api;
 
-use App\Services\Api\Api;
-use App\Http\Controllers\Controller;
+use Sys\Api\Api;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class PostController extends Controller
+class PostController
 {
     protected $api;
 
@@ -16,7 +15,7 @@ class PostController extends Controller
         $this->api = $api;
     }
 
-    public function index(ServerRequestInterface $request, ResponseInterface $response, array $params = []): ResponseInterface
+    public function index(ServerRequestInterface $request, ResponseInterface $response)
     {
         $response->getBody()->write(
             $this->api->post->all()->body()
@@ -25,7 +24,7 @@ class PostController extends Controller
         return $response;
     }
 
-    public function show(ServerRequestInterface $request, ResponseInterface $response, array $params = []): ResponseInterface
+    public function show(ServerRequestInterface $request, ResponseInterface $response, array $params = [])
     {
         $response->getBody()->write(
             $this->api->post->get($params['id'])->body()

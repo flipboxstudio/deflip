@@ -2,10 +2,15 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
+use Dotenv\Dotenv;
+use Sys\Application;
 use Sys\HttpKernel;
+use App\Providers\AppServiceProvider;
+use App\Providers\RouteServiceProvider;
 
-$app = require_once(__DIR__.'/../bootstrap/app.php');
+(new Dotenv(__DIR__.'/..'))->load();
 
+$app = new Application(__DIR__.'/..');
 $httpKernel = new HttpKernel($app);
 
 return $httpKernel->run();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Api;
+namespace Sys\Api;
 
 use Exception;
 use ArrayAccess;

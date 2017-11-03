@@ -1,11 +1,10 @@
 <?php
 
-namespace Sys\Providers;
+namespace Sys\Route\Providers;
 
-use ReflectionClass;
-use Sys\RouteStrategy;
-use ReflectionParameter;
-use League\Route\RouteCollection;
+use Sys\Route\RouteCollection;
+use Sys\Providers\ServiceProvider;
+use Sys\Route\Strategies\WebStrategy;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -27,9 +26,9 @@ class RouteServiceProvider extends ServiceProvider
         $this->container->share('League\Route\RouteCollection', function () {
             $route = new RouteCollection($this->container);
 
-            $route->setStrategy(new RouteStrategy($this->container));
+            $route->setStrategy(new WebStrategy($this->container));
 
-            require_once $this->container->get('app.routesPath').'/web.php';
+            require_once $this->container->get('app.path').'/routes.php';
 
             return $route;
         });
@@ -38,11 +37,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function registerController()
     {
         foreach ($this->controllers as $controller) {
-            $this->container->add($controller)->withArguments(
-                array_map(function (ReflectionParameter $parameter): string {
-                    return $parameter->getType()->getName();
-                }, (new ReflectionClass($controller))->getConstructor()->getParameters())
-            );
+            $this->container->add($controller);
         }
     }
 }
