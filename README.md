@@ -14,6 +14,7 @@
         - [Namespaces](#route-group-namespaces)
         - [Route Prefixes](#route-group-prefixes)
     - [Auto Resolve Routing](#route-auto-resolve)
+- [Template](#template)
 
 ---
 
@@ -219,6 +220,15 @@ DeFlip works with static routing out of the box. If you don't register your appl
 | `/about`    | `/views/about.php`  |
 | `/foo/bar`  | `/views/foo/bar.php`|
 
-You can serve a static file within dynamic route, for example, if client want to access `/blog/good-developer-101` page, DeFlip will try to find `/views/blog/good-developer-101.php` file. If this file does not exists, then it will try to find `/views/blog/_id.php` file. If this file exists, you can access the route parameter via `$id` variable, in this case in your view file, `$id` value is `good-developer-101`.
+You can serve a static file within dynamic route, for example, if client want to access `/blog/good-developer-101` page, DeFlip will try to find `/views/blog/good-developer-101.php` file. If this file does not exists, then it will try to find `/views/blog/_id.php` file. If this file exists, you can access the route parameter via `$id` variable.
+
+    <?php echo $this->e($id) ?> <!-- output is 'good-developer-101' -->
 
 DeFlip also handle any exception out of the box, simply create a `/views/500.php` file, any exception (**EXCEPT `HttpException`**) will be rendered into this view. If the exception is an instance of `HttpException`, DeFlip will try to find `/views/{HTTP_STATUS_CODE}.php` file. Yes, if you want to handle a `NotFoundHttpException` simply create `/views/404.php` file and if you want to handle `MethodNotAllowedHttpException` simply create `/views/405.php` file.
+
+---
+
+<a name="template"></a>
+# Template
+
+DeFlip uses Plates as it's default template engine. For more information about Plates, see [here](http://platesphp.com/).
