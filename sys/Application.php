@@ -99,7 +99,7 @@ class Application extends Container
         $this->instance('app', $this);
         $this->instance('Sys\Application', $this);
 
-        $this->instance('path', $this->path());
+        $this->instance('path', $this->basePath);
 
         $this->registerContainerAliases();
     }
@@ -195,16 +195,6 @@ class Application extends Container
         }
 
         throw $e;
-    }
-
-    /**
-     * Register a deferred provider and service.
-     *
-     * @param string $provider
-     */
-    public function registerDeferredProvider($provider)
-    {
-        return $this->register($provider);
     }
 
     /**
@@ -354,24 +344,6 @@ class Application extends Container
     }
 
     /**
-     * Load the Eloquent library for the application.
-     */
-    public function withEloquent()
-    {
-        $this->make('db');
-    }
-
-    /**
-     * Get the path to the application "app" directory.
-     *
-     * @return string
-     */
-    public function path()
-    {
-        return $this->basePath.DIRECTORY_SEPARATOR.'app';
-    }
-
-    /**
      * Get the base path for the application.
      *
      * @param string|null $path
@@ -380,17 +352,7 @@ class Application extends Container
      */
     public function basePath($path = null)
     {
-        if (isset($this->basePath)) {
-            return $this->basePath.($path ? '/'.$path : $path);
-        }
-
-        if ($this->runningInConsole()) {
-            $this->basePath = getcwd();
-        } else {
-            $this->basePath = realpath(getcwd().'/../');
-        }
-
-        return $this->basePath($path);
+        return $this->basePath.($path ? '/'.$path : $path);
     }
 
     /**

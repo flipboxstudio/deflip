@@ -6,10 +6,10 @@ use Closure;
 use Exception;
 use Throwable;
 use FastRoute\Dispatcher;
-use Sys\Routing\Pipeline;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Contracts\Support\Responsable;
 use Sys\Routing\Closure as RoutingClosure;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -259,7 +259,9 @@ trait RoutesRequests
             }
         }
 
-        throw new NotFoundHttpException("View [{$view}] not found or route to [$path] has no handler.");
+        throw new NotFoundHttpException(
+            "View [$view or $path] does not exist or route to [$path] has no matching handler."
+        );
     }
 
     /**

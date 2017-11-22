@@ -14,7 +14,9 @@
         - [Namespaces](#route-group-namespaces)
         - [Route Prefixes](#route-group-prefixes)
     - [Auto Resolve Routing](#route-auto-resolve)
+- [Http Middleware](#http-middleware) (Working, TBD)
 - [Template](#template)
+- [Error Handling](#error-handling) (Not Working, TBD)
 
 ---
 

@@ -99,18 +99,6 @@ trait ProvidesConvenienceMethods
     }
 
     /**
-     * Dispatch a job to its appropriate handler.
-     *
-     * @param mixed $job
-     *
-     * @return mixed
-     */
-    public function dispatch($job)
-    {
-        return app('Illuminate\Contracts\Bus\Dispatcher')->dispatch($job);
-    }
-
-    /**
      * Get a validation factory instance.
      *
      * @return \Illuminate\Contracts\Validation\Factory
