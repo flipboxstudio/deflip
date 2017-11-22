@@ -180,3 +180,18 @@ if (!function_exists('url')) {
         return app('url')->to($path, $parameters, $secure);
     }
 }
+
+if (!function_exists('view')) {
+    /**
+     * Render a view.
+     *
+     * @param string $view
+     * @param array  $data
+     *
+     * @return string
+     */
+    function view($view, array $data = [])
+    {
+        return app('view')->render($view, $data);
+    }
+}

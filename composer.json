@@ -21,7 +21,6 @@
     "minimum-stability": "stable",
     "require": {
         "zendframework/zend-diactoros": "^1.6",
-        "kitetail/zttp": "^0.3.0",
         "vlucas/phpdotenv": "^2.4",
         "illuminate/container": "^5.5",
         "illuminate/http": "^5.5",

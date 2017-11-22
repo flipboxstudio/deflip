@@ -329,6 +329,19 @@ class Router
     }
 
     /**
+     * Static routing.
+     *
+     * @param string $uri
+     * @param string $view
+     */
+    public function view($uri, $view)
+    {
+        return $this->get($uri, function () use ($view) {
+            return view($view);
+        });
+    }
+
+    /**
      * Register a route with the application.
      *
      * @param string $uri

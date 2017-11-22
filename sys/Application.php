@@ -7,6 +7,8 @@ use League\Plates\Engine;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Container\Container;
+use Whoops\Run as ExceptionHandler;
+use Whoops\Handler\PrettyPageHandler;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 use Zend\Diactoros\Response as PsrResponse;
@@ -70,6 +72,12 @@ class Application extends Container
     {
         if (!empty(env('APP_TIMEZONE'))) {
             date_default_timezone_set(env('APP_TIMEZONE', 'UTC'));
+        }
+
+        if (env('APP_DEBUG')) {
+            $whoops = new ExceptionHandler();
+            $whoops->pushHandler(new PrettyPageHandler());
+            $whoops->register();
         }
 
         $this->basePath = $basePath;
@@ -175,13 +183,15 @@ class Application extends Container
             throw $e;
         }
 
-        return new IlluminateResponse(
-            $viewEngine->exists($e->getStatusCode())
-                ? $this->view->render($e->getStatusCode())
-                : $e->getMessage(),
-            $e->getStatusCode(),
-            $e->getHeaders()
-        );
+        if ($viewEngine->exists($e->getStatusCode())) {
+            return new IlluminateResponse(
+                $this->view->render($e->getStatusCode()),
+                $e->getStatusCode(),
+                $e->getHeaders()
+            );
+        }
+
+        throw $e;
     }
 
     /**
@@ -302,11 +312,6 @@ class Application extends Container
         });
     }
 
-    protected function registerApiBindings()
-    {
-        $this->singleton('Sys\Api\Api');
-    }
-
     /**
      * Register the facades for the application.
      *
@@ -398,7 +403,6 @@ class Application extends Container
             'Sys\Routing\Router' => 'router',
             'Sys\Routing\UrlGenerator' => 'url',
             'view' => 'League\Plates\Engine',
-            'api' => 'Sys\Api\Api',
         ];
     }
 
@@ -415,8 +419,6 @@ class Application extends Container
         'validator' => 'registerValidatorBindings',
         'Illuminate\Contracts\Validation\Factory' => 'registerValidatorBindings',
         'League\Plates\Engine' => 'registerViewBindings',
-        'Sys\Api\Api' => 'registerApiBindings',
-        'api' => 'registerApiBindings',
         'view' => 'registerViewBindings',
     ];
 }

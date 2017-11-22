@@ -245,7 +245,7 @@ trait RoutesRequests
         $path = $this->make('request')->getPathInfo();
         $viewEngine = $this->make('view');
         $view = '/' === $path ? 'index' : $path;
-        $isDynamicView = strpos($view, '/_') !== false;
+        $isDynamicView = false !== strpos($view, '/_');
 
         if ($viewEngine->exists($view) && !$isDynamicView) {
             return new Response($viewEngine->render($view));
@@ -259,7 +259,7 @@ trait RoutesRequests
             }
         }
 
-        throw new NotFoundHttpException();
+        throw new NotFoundHttpException("View [{$view}] not found or route to [$path] has no handler.");
     }
 
     /**
