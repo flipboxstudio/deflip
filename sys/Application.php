@@ -6,12 +6,14 @@ use Sys\Routing\Router;
 use League\Plates\Engine;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Symfony\Component\Debug\Debug;
 use Illuminate\Container\Container;
-use Whoops\Run as ExceptionHandler;
-use Whoops\Handler\PrettyPageHandler;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use Symfony\Component\Debug\ErrorHandler;
 use Zend\Diactoros\Response as PsrResponse;
+use Symfony\Component\Debug\DebugClassLoader;
+use Symfony\Component\Debug\ExceptionHandler;
 use Illuminate\Http\Response as IlluminateResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
@@ -75,9 +77,10 @@ class Application extends Container
         }
 
         if (env('APP_DEBUG')) {
-            $whoops = new ExceptionHandler();
-            $whoops->pushHandler(new PrettyPageHandler());
-            $whoops->register();
+            Debug::enable();
+            ErrorHandler::register();
+            ExceptionHandler::register();
+            DebugClassLoader::enable();
         }
 
         $this->basePath = $basePath;
